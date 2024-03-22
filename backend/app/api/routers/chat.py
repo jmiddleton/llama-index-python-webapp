@@ -30,8 +30,8 @@ async def chat(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="No messages provided",
         )
-    lastMessage = data.messages.pop()
-    if lastMessage.role != MessageRole.USER:
+    last_message = data.messages.pop()
+    if last_message.role != MessageRole.USER:
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="Last message must be from user",
@@ -46,7 +46,7 @@ async def chat(
     ]
 
     # query chat engine
-    response = await chat_engine.astream_chat(lastMessage.content, messages)
+    response = await chat_engine.astream_chat(last_message.content, messages)
 
     # stream response
     async def event_generator():

@@ -41,3 +41,4 @@
 /backend/storage
 /backend/.env
 /backend/data/*
+backend/llamaindex.crt

@@ -24,7 +24,7 @@ export default function ChatAvatar(message: Message) {
       <Image
         className="rounded-md"
         src="/llama.png"
-        alt="Llama Logo"
+        alt="Imed Logo"
         width={24}
         height={24}
         priority

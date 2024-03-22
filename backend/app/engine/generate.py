@@ -1,15 +1,11 @@
 from dotenv import load_dotenv
+from llama_index.core import VectorStoreIndex
+from app.engine.constants import STORAGE_DIR
+from app.engine.loader import get_documents, get_webpages
+from app.settings import init_settings
+import logging
 
 load_dotenv()
-
-import logging
-from llama_index.core.indices import (
-    VectorStoreIndex,
-)
-from app.engine.constants import STORAGE_DIR
-from app.engine.loader import get_documents
-from app.settings import init_settings
-
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger()
@@ -19,8 +15,10 @@ def generate_datasource():
     logger.info("Creating new index")
     # load the documents and create the index
     documents = get_documents()
+    #web_documents = get_webpages()
+
     index = VectorStoreIndex.from_documents(
-        documents,
+        documents
     )
     # store it for later
     index.storage_context.persist(STORAGE_DIR)

@@ -1,11 +1,19 @@
 "use client";
 
 import { useChat } from "ai/react";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { insertDataIntoMessages } from "./transform";
 import { ChatInput, ChatMessages } from "./ui/chat";
 
 export default function ChatSection() {
+  const [isChecked, setIsChecked] = useState<boolean>(true);
+  
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked);
+  };
+
+  const api = isChecked ? process.env.NEXT_PUBLIC_CHAT_API : process.env.NEXT_PUBLIC_QUERY_API;
+
   const {
     messages,
     input,
@@ -16,7 +24,7 @@ export default function ChatSection() {
     stop,
     data,
   } = useChat({
-    api: process.env.NEXT_PUBLIC_CHAT_API,
+    api: api,
     headers: {
       "Content-Type": "application/json", // using JSON because of vercel/ai 2.2.26
     },
@@ -28,6 +36,10 @@ export default function ChatSection() {
 
   return (
     <div className="space-y-4 max-w-5xl w-full">
+      <label >
+        <input type="checkbox" checked={isChecked} onChange={handleCheckboxChange} />
+        &nbsp;&nbsp;{isChecked? "Chat Mode" : "Query Mode"}
+      </label>
       <ChatMessages
         messages={transformedMessages}
         isLoading={isLoading}
