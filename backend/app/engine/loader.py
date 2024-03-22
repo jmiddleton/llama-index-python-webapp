@@ -16,4 +16,4 @@ def get_documents():
 
 def get_webpages():
     loader = BeautifulSoupWebReader()
-    return loader.load_data(urls=["http://localhost:3000/Kailo+Troubleshooting+Guide.doc.html"])
+    return loader.load_data(urls=["http://localhost:3000/doc.html"])
