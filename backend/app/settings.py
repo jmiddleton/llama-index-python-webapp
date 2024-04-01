@@ -37,9 +37,9 @@ def init_settings():
     llm_configs = llm_config_from_env()
     embedding_configs = embedding_config_from_env()
 
-    Settings.llm = OpenAI()
+    Settings.llm = OpenAI(llm_configs= llm_configs)
     #Settings.llm = Anthropic(model="claude-3-opus-20240229", temperature=0.0)
-    #Settings.llm = Ollama(model="llama2", request_timeout=260.0)
+    #Settings.llm = Ollama(model="llama2:7b", request_timeout=30.0)
     
     #Settings.embed_model = OpenAIEmbedding()
     Settings.embed_model= HuggingFaceEmbedding(model_name="BAAI/bge-large-en-v1.5")

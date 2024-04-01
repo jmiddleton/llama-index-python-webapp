@@ -7,7 +7,7 @@ authors = [ "Jorge Middleton <mail@i-med.com.au>" ]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11,<3.12"
+python = "^3.9,<3.12"
 fastapi = "^0.109.1"
 python-dotenv = "^1.0.0"
 llama-index = "^0.10.19"
@@ -17,6 +17,8 @@ llama-parse = "^0.3.9"
 ollama = "^0.1.7"
 llama-index-llms-ollama = "^0.1.2"
 llama-index-readers-web = "^0.1.7"
+llama-index-postprocessor-flag-embedding-reranker = "^0.1.2"
+flagembedding = {git = "https://github.com/FlagOpen/FlagEmbedding.git"}
 
 [tool.poetry.dependencies.uvicorn]
 extras = [ "standard" ]
