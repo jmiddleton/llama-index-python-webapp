@@ -19,15 +19,13 @@ def generate_datasource():
     documents = get_documents()
     #web_documents = get_webpages()
 
-    node_parser = MarkdownElementNodeParser(llm= Settings.llm , num_workers=8)
+    node_parser = MarkdownElementNodeParser(llm= Settings.llm , num_workers=4)
     nodes = node_parser.get_nodes_from_documents(documents)
     base_nodes, objects = node_parser.get_nodes_and_objects(nodes)
 
     recursive_index = VectorStoreIndex(nodes=base_nodes+objects)
-    #index = VectorStoreIndex.from_documents(documents)
 
     # store it for later
-    #index.storage_context.persist(STORAGE_DIR)
     recursive_index.storage_context.persist(STORAGE_DIR)
     logger.info(f"Finished creating new index. Stored in {STORAGE_DIR}")
 

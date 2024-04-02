@@ -1038,38 +1038,36 @@ socks = ["socksio (==1.*)"]
 
 [[package]]
 name = "huggingface-hub"
-version = "0.22.2"
+version = "0.20.3"
 description = "Client library to download and publish models, datasets and other repos on the huggingface.co hub"
 optional = false
 python-versions = ">=3.8.0"
 files = [
-    {file = "huggingface_hub-0.22.2-py3-none-any.whl", hash = "sha256:3429e25f38ccb834d310804a3b711e7e4953db5a9e420cc147a5e194ca90fd17"},
-    {file = "huggingface_hub-0.22.2.tar.gz", hash = "sha256:32e9a9a6843c92f253ff9ca16b9985def4d80a93fb357af5353f770ef74a81be"},
+    {file = "huggingface_hub-0.20.3-py3-none-any.whl", hash = "sha256:d988ae4f00d3e307b0c80c6a05ca6dbb7edba8bba3079f74cda7d9c2e562a7b6"},
+    {file = "huggingface_hub-0.20.3.tar.gz", hash = "sha256:94e7f8e074475fbc67d6a71957b678e1b4a74ff1b64a644fd6cbb83da962d05d"},
 ]
 
 [package.dependencies]
 aiohttp = {version = "*", optional = true, markers = "extra == \"inference\""}
 filelock = "*"
 fsspec = ">=2023.5.0"
-minijinja = {version = ">=1.0", optional = true, markers = "extra == \"inference\""}
 packaging = ">=20.9"
+pydantic = {version = ">1.1,<3.0", optional = true, markers = "python_version > \"3.8\" and extra == \"inference\""}
 pyyaml = ">=5.1"
 requests = "*"
 tqdm = ">=4.42.1"
 typing-extensions = ">=3.7.4.3"
 
 [package.extras]
-all = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "minijinja (>=1.0)", "mypy (==1.5.1)", "numpy", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "ruff (>=0.3.0)", "soundfile", "types-PyYAML", "types-requests", "types-simplejson", "types-toml", "types-tqdm", "types-urllib3", "typing-extensions (>=4.8.0)", "urllib3 (<2.0)"]
+all = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "mypy (==1.5.1)", "numpy", "pydantic (>1.1,<2.0)", "pydantic (>1.1,<3.0)", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "ruff (>=0.1.3)", "soundfile", "types-PyYAML", "types-requests", "types-simplejson", "types-toml", "types-tqdm", "types-urllib3", "typing-extensions (>=4.8.0)", "urllib3 (<2.0)"]
 cli = ["InquirerPy (==0.3.4)"]
-dev = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "minijinja (>=1.0)", "mypy (==1.5.1)", "numpy", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "ruff (>=0.3.0)", "soundfile", "types-PyYAML", "types-requests", "types-simplejson", "types-toml", "types-tqdm", "types-urllib3", "typing-extensions (>=4.8.0)", "urllib3 (<2.0)"]
+dev = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "mypy (==1.5.1)", "numpy", "pydantic (>1.1,<2.0)", "pydantic (>1.1,<3.0)", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "ruff (>=0.1.3)", "soundfile", "types-PyYAML", "types-requests", "types-simplejson", "types-toml", "types-tqdm", "types-urllib3", "typing-extensions (>=4.8.0)", "urllib3 (<2.0)"]
 fastai = ["fastai (>=2.4)", "fastcore (>=1.3.27)", "toml"]
-hf-transfer = ["hf-transfer (>=0.1.4)"]
-inference = ["aiohttp", "minijinja (>=1.0)"]
-quality = ["mypy (==1.5.1)", "ruff (>=0.3.0)"]
+inference = ["aiohttp", "pydantic (>1.1,<2.0)", "pydantic (>1.1,<3.0)"]
+quality = ["mypy (==1.5.1)", "ruff (>=0.1.3)"]
 tensorflow = ["graphviz", "pydot", "tensorflow"]
-tensorflow-testing = ["keras (<3.0)", "tensorflow"]
-testing = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "minijinja (>=1.0)", "numpy", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "soundfile", "urllib3 (<2.0)"]
-torch = ["safetensors", "torch"]
+testing = ["InquirerPy (==0.3.4)", "Jinja2", "Pillow", "aiohttp", "gradio", "jedi", "numpy", "pydantic (>1.1,<2.0)", "pydantic (>1.1,<3.0)", "pytest", "pytest-asyncio", "pytest-cov", "pytest-env", "pytest-rerunfailures", "pytest-vcr", "pytest-xdist", "soundfile", "urllib3 (<2.0)"]
+torch = ["torch"]
 typing = ["types-PyYAML", "types-requests", "types-simplejson", "types-toml", "types-tqdm", "types-urllib3", "typing-extensions (>=4.8.0)"]
 
 [[package]]
@@ -1319,6 +1317,23 @@ files = [
 [package.dependencies]
 anthropic = ">=0.20.0,<0.21.0"
 llama-index-core = ">=0.10.1,<0.11.0"
+
+[[package]]
+name = "llama-index-llms-huggingface"
+version = "0.1.4"
+description = "llama-index llms huggingface integration"
+optional = false
+python-versions = ">=3.8.1,<4.0"
+files = [
+    {file = "llama_index_llms_huggingface-0.1.4-py3-none-any.whl", hash = "sha256:4cff9a7e4a2bd1197a9653dc00ed8b9bdd1f83f7e3f89c2dbed433278bd85858"},
+    {file = "llama_index_llms_huggingface-0.1.4.tar.gz", hash = "sha256:b2c09671bcfea22d55b74453958262b042f8cc48bab1b660e15fd4c7f1808fd6"},
+]
+
+[package.dependencies]
+huggingface-hub = ">=0.20.3,<0.21.0"
+llama-index-core = ">=0.10.1,<0.11.0"
+torch = ">=2.1.2,<3.0.0"
+transformers = {version = ">=4.37.0,<5.0.0", extras = ["torch"]}
 
 [[package]]
 name = "llama-index-llms-ollama"
@@ -1710,23 +1725,6 @@ packaging = ">=17.0"
 dev = ["marshmallow[tests]", "pre-commit (>=3.5,<4.0)", "tox"]
 docs = ["alabaster (==0.7.16)", "autodocsumm (==0.2.12)", "sphinx (==7.2.6)", "sphinx-issues (==4.0.0)", "sphinx-version-warning (==1.1.2)"]
 tests = ["pytest", "pytz", "simplejson"]
-
-[[package]]
-name = "minijinja"
-version = "1.0.16"
-description = "An experimental Python binding of the Rust MiniJinja template engine."
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "minijinja-1.0.16-cp38-abi3-macosx_10_12_x86_64.macosx_11_0_arm64.macosx_10_12_universal2.whl", hash = "sha256:b7c1640d23ad719da999ab434fd58e895125e067d310d512c9a45ec7e7f301dc"},
-    {file = "minijinja-1.0.16-cp38-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:f83ca4a37d73b57b87cee4d50f7ce2ade2d6c04fbede49faabc37f7244161bd6"},
-    {file = "minijinja-1.0.16-cp38-abi3-manylinux_2_17_armv7l.manylinux2014_armv7l.whl", hash = "sha256:87c61c94c014c3a6d2ef83ee2f67229ee23b13b3586c8d4d3a7d090ba19f1b6c"},
-    {file = "minijinja-1.0.16-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:beeb7fd7552e351b071b1d01fa80600a332b364c83f0f4a5c96b96d74d162434"},
-    {file = "minijinja-1.0.16-cp38-abi3-manylinux_2_5_i686.manylinux1_i686.whl", hash = "sha256:38cc378dd256bd3766f1c83754c9a4407356b6d992defc725eab8a7c203e07b9"},
-    {file = "minijinja-1.0.16-cp38-abi3-win32.whl", hash = "sha256:f7f0da6c0d2b78bce9aa0f2bbfebc0ece18cdf8dae9430b4001055b8eb77911c"},
-    {file = "minijinja-1.0.16-cp38-abi3-win_amd64.whl", hash = "sha256:0a41541c28fd7ce64b38ddc60974930f81c163440c348393bd5143debeb309b3"},
-    {file = "minijinja-1.0.16.tar.gz", hash = "sha256:57f6e98bc735794eb87648f251e68fbfd9cf50333f6a4053b398751483350826"},
-]
 
 [[package]]
 name = "mpmath"
@@ -3703,6 +3701,7 @@ files = [
 ]
 
 [package.dependencies]
+accelerate = {version = ">=0.21.0", optional = true, markers = "extra == \"torch\""}
 filelock = "*"
 huggingface-hub = ">=0.19.3,<1.0"
 numpy = ">=1.17"
@@ -3712,6 +3711,7 @@ regex = "!=2019.12.17"
 requests = "*"
 safetensors = ">=0.4.1"
 tokenizers = ">=0.14,<0.19"
+torch = {version = "*", optional = true, markers = "extra == \"torch\""}
 tqdm = ">=4.27"
 
 [package.extras]
@@ -4429,4 +4429,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.9,<3.12.3"
-content-hash = "eef9a38674e7fc0794fa2425ee127a4eb5b6e45447151dcace4758664cf775e0"
+content-hash = "6705150500c0c95106cf24df29698f3db4e19e6cb1e7756db4d4bb209066a401"

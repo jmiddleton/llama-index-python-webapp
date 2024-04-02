@@ -19,6 +19,7 @@ llama-index-llms-ollama = "^0.1.2"
 llama-index-readers-web = "^0.1.7"
 llama-index-postprocessor-flag-embedding-reranker = "^0.1.2"
 flagembedding = {git = "https://github.com/FlagOpen/FlagEmbedding.git"}
+llama-index-llms-huggingface = "^0.1.4"
 
 [tool.poetry.dependencies.uvicorn]
 extras = [ "standard" ]
