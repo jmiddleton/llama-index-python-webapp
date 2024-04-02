@@ -3,7 +3,7 @@
 name = "app"
 version = "0.1.0"
 description = ""
-authors = [ "Jorge Middleton <mail@i-med.com.au>" ]
+authors = [ "Jorge Middleton <jorge.middleton@i-med.com.au>" ]
 readme = "README.md"
 
 [tool.poetry.dependencies]
