@@ -2,3 +2,10 @@ __pycache__
 storage
 .env
 storage_back
+data/
+data1/
+data2/
+data3/
+storage1/
+storage2/
+storage3/

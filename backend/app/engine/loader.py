@@ -5,14 +5,13 @@ from llama_index.readers.web import BeautifulSoupWebReader
 DATA_DIR = "data"  # directory containing the documents
 
 parser = LlamaParse(
-    #api_key="...",  # can also be set in your env as LLAMA_CLOUD_API_KEY
-    result_type="markdown"  # "markdown" and "text" are available
+    result_type="markdown"
 )
 
 def get_documents():
-    file_extractor = {".pdf": parser}
+    #file_extractor = {".pdf": parser}
 
-    return SimpleDirectoryReader(DATA_DIR, recursive= True, file_extractor=file_extractor).load_data()
+    return SimpleDirectoryReader(DATA_DIR, recursive= True).load_data()
 
 def get_webpages():
     loader = BeautifulSoupWebReader()
