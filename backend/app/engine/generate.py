@@ -10,7 +10,7 @@ from llama_index.core.node_parser import (
     MarkdownElementNodeParser
 )
 from llama_index.core.settings import Settings
-from app.engine.constants import STORAGE_DIR
+from app.engine.constants import STORAGE_DIR, DATA_DIR
 from app.engine.loader import get_documents, get_webpages
 from app.settings import init_settings
 import logging
@@ -25,33 +25,25 @@ load_dotenv()
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger()
 
-
 def generate_datasource():
-    logger.info("Creating new index")
     # load the documents and create the index
-    documents = get_documents()
-    #web_documents = get_webpages()
+    for i in range(3, 4):
+        logger.info(f"Creating new index for {DATA_DIR + str(i)}...")
+        documents = get_documents(DATA_DIR + str(i))
+        
+        nodes = node_parser.get_nodes_from_documents(documents)
+        leaf_nodes = get_leaf_nodes(nodes)
 
-    
-    nodes = node_parser.get_nodes_from_documents(documents)
-    leaf_nodes = get_leaf_nodes(nodes)
+        storage_context = StorageContext.from_defaults()
+        storage_context.docstore.add_documents(nodes)
 
-    storage_context = StorageContext.from_defaults()
-    storage_context.docstore.add_documents(nodes)
+        index = VectorStoreIndex(
+            leaf_nodes, storage_context=storage_context
+        )
 
-    index = VectorStoreIndex(
-        leaf_nodes, storage_context=storage_context
-    )
-
-    # node_parser = MarkdownElementNodeParser(llm= Settings.llm , num_workers=4)
-    # nodes = node_parser.get_nodes_from_documents(documents)
-    # base_nodes, objects = node_parser.get_nodes_and_objects(nodes)
-
-    #index = VectorStoreIndex(nodes=base_nodes+objects)
-
-    # store it for later
-    index.storage_context.persist(STORAGE_DIR)
-    logger.info(f"Finished creating new index. Stored in {STORAGE_DIR}")
+        # store it for later
+        index.storage_context.persist(STORAGE_DIR + str(i))
+        logger.info(f"Finished creating new index. Stored in {STORAGE_DIR + str(i)}")
 
 
 if __name__ == "__main__":
