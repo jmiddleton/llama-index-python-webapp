@@ -23,6 +23,8 @@ llama-index-llms-huggingface = "^0.1.4"
 llama-index-llms-cohere = "^0.1.6"
 llama-index-embeddings-cohere = "^0.1.7"
 llama-index-postprocessor-cohere-rerank = "^0.1.4"
+requests = "^2.31.0"
+jmespath = "^1.0.1"
 
 [tool.poetry.dependencies.uvicorn]
 extras = [ "standard" ]

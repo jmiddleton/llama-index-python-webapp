@@ -27,7 +27,7 @@ logger = logging.getLogger()
 
 def generate_datasource():
     # load the documents and create the index
-    for i in range(3, 4):
+    for i in range(1, 4):
         logger.info(f"Creating new index for {DATA_DIR + str(i)}...")
         documents = get_documents(DATA_DIR + str(i))
         

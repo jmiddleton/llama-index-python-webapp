@@ -3,9 +3,11 @@ storage
 .env
 storage_back
 data/
+data0/
 data1/
 data2/
 data3/
+storage0/
 storage1/
 storage2/
 storage3/

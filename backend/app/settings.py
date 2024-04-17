@@ -7,6 +7,12 @@ from llama_index.embeddings.huggingface import HuggingFaceEmbedding
 from llama_index.llms.ollama import Ollama
 from llama_index.embeddings.cohere import CohereEmbedding
 from llama_index.llms.cohere import Cohere
+from llama_index.core.callbacks import CallbackManager, LlamaDebugHandler
+
+llama_debug = LlamaDebugHandler(print_trace_on_end=True)
+callback_manager = CallbackManager([llama_debug])
+
+COHERE_API_KEY = os.getenv("COHERE_API_KEY")
 
 def llm_config_from_env() -> Dict:
     from llama_index.core.constants import DEFAULT_TEMPERATURE
@@ -35,21 +41,23 @@ def embedding_config_from_env() -> Dict:
 
 
 def init_settings():
+    Settings.callback_manager = callback_manager
+
+    #Settings.llm = Cohere(api_key=COHERE_API_KEY, model="command-r-plus")
+    # Settings.embed_model = CohereEmbedding(
+    #     cohere_api_key=COHERE_API_KEY,
+    #     model_name="embed-english-v3.0",
+    #     input_type="search_query",
+    # )
+
     llm_configs = llm_config_from_env()
     embedding_configs = embedding_config_from_env()
-    COHERE_API_KEY = os.getenv("COHERE_API_KEY")
-
+    
     Settings.llm = OpenAI(llm_configs= llm_configs)
-    #Settings.llm = Ollama(model="llama2:7b", request_timeout=30.0)
-    Settings.llm = Cohere(api_key=COHERE_API_KEY, model="command-r-plus")
-
-    #Settings.embed_model = OpenAIEmbedding()
-    #Settings.embed_model= HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
-    Settings.embed_model = CohereEmbedding(
-        cohere_api_key=COHERE_API_KEY,
-        model_name="embed-english-v3.0",
-        input_type="search_query",
-    )
+    Settings.embed_model = OpenAIEmbedding(embedding_configs= embedding_configs)
     
     Settings.chunk_size = int(os.getenv("CHUNK_SIZE", "1024"))
     Settings.chunk_overlap = int(os.getenv("CHUNK_OVERLAP", "20"))
+
+    #Settings.llm = Ollama(model="llama2:7b", request_timeout=30.0)
+    #Settings.embed_model= HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")

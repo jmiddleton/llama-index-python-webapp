@@ -9,9 +9,9 @@ parser = LlamaParse(
 )
 
 def get_documents(folder:str = DATA_DIR):
-    #file_extractor = {".pdf": parser}
+    file_extractor = {".pdf": parser}
 
-    return SimpleDirectoryReader(folder, recursive= True).load_data()
+    return SimpleDirectoryReader(folder, file_extractor=file_extractor, recursive= True).load_data()
 
 def get_webpages():
     loader = BeautifulSoupWebReader()
