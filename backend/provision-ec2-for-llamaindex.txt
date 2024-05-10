@@ -1,0 +1,38 @@
+
+cd /
+sudo mkdir /data
+sudo mount /dev/nvme0n1p1 /data
+sudo blkid
+sudo vim /etc/fstab
+#UUID=aebf131c-6957-451e-8d34-ec978d9581ae  /data  xfs  defaults,nofail  0  2
+sudo umount /data
+sudo mount -a
+sudo yum update
+cd /data/
+sudo yum install python3.11
+sudo curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+source ~/.bashrc
+nvm install --lts
+sudo yum install npm
+sudo yum install git
+sudo chown ec2-user:ec2-user /data
+git clone https://github.com/jmiddleton/llama-index-python-webapp.git
+
+cd /data/llama-index-python-webapp/backend
+sudo yum install pip
+pip install poetry
+poetry env use python3.11
+poetry install
+poetry shell
+vi .env
+mkdir data
+cd data
+wget http://www.visageimaging.com/downloads/Visage7/Visage7_HL7InterfaceSpecification.pdf
+
+
+
+curl -fsSL https://ollama.com/install.sh | sh
+
+
+dnf install kernel-modules-extra.x86_64
+#https://medium.com/@amardewri/how-to-deploy-local-llm-using-ollama-server-and-ollama-web-ui-on-amazon-ec2-91ffee49d9cc
