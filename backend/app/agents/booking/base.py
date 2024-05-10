@@ -12,14 +12,14 @@ class BookingToolSpec(BaseToolSpec):
     Specifies tools for booking an appointment at IMED.
     """
 
-    spec_functions = ["get_body_parts", "get_body_part_id",
+    spec_functions = ["get_scans", "get_body_part",
                       "search_clinic_by_body_part", "search_appointments"]
 
-    def get_body_parts(
+    def get_scans(
         self, scan_name: str
     ) -> List[Any]:
         """
-        Retrieve body parts of an scan by name.
+        Retrieve body part identifier and name.
 
         Args:
             scan_name (str): Name of the scan.
@@ -59,13 +59,12 @@ class BookingToolSpec(BaseToolSpec):
         
         return found_children
     
-    def get_body_part_id(self, body_part_id: str, scan: str
-                         ) -> str:
+    def get_body_part(self, body_part_name: str, scan: str) -> str:
         """
         Get body part by name and scan.
 
         Args:
-            body_part_id (str): Name of the body identifier.
+            body_part_name (str): Name of the body part.
             scan (str): Scan name
         """
 
@@ -84,7 +83,7 @@ class BookingToolSpec(BaseToolSpec):
             for group in data:
                 if scan.lower() in group['group']['name'].lower():
                     found_part.extend(group['exams'])
-                    exam_list = self.find_exams(group['children'], body_part_id.lower())
+                    exam_list = self.find_exams(group['children'], body_part_name.lower())
                     found_part.extend(exam_list)
 
                     if len(found_part) > 0:
@@ -110,10 +109,10 @@ class BookingToolSpec(BaseToolSpec):
         self, body_part_id: str, clinic_name: str, **load_kwargs: Dict[str, Any]
     ) -> str:
         """
-        Search clinics by body part ID and name.
+        Search clinic by body part identifier and clinic name.
 
         Args:
-            body_part_id (str): Body part ID.
+            body_part_id (str): Body part Identifier.
             clinic_name (str): Clinic name.
             region (str): Region name where the clinic is located.
         """
