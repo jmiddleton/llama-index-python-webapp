@@ -36,3 +36,36 @@ curl -fsSL https://ollama.com/install.sh | sh
 
 dnf install kernel-modules-extra.x86_64
 #https://medium.com/@amardewri/how-to-deploy-local-llm-using-ollama-server-and-ollama-web-ui-on-amazon-ec2-91ffee49d9cc
+
+
+
+==== run nextjs as service ======
+npm install -g pm2
+pm2 start "npm run dev" --name "Chatbot"
+pm2 status
+=================================
+
+==== run python as service ======
+sudo systemctl daemon-reload
+sudo vi /etc/systemd/system/python-service.service
+sudo systemctl enable python-service.service
+sudo systemctl start python-service.service
+=================================
+
+==== content of python-service.service ======
+[Unit]
+Description=Your Python App Service
+After=network.target
+
+[Service]
+User=ec2-user
+Group=ec2-user
+WorkingDirectory=/data/llama-index-python-webapp/backend
+ExecStart=/data/llama-index-python-webapp/backend/python-service.sh
+Restart=always
+Environment="PATH=/home/ec2-user/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
+[Install]
+WantedBy=multi-user.target
+
+=================================
