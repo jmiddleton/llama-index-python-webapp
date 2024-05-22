@@ -175,8 +175,7 @@ class BookingToolSpec(BaseToolSpec):
 
             start_date= date.today()
             end_date= start_date + timedelta(days=7)
-            response = requests.get(f'https://book.i-med.com.au/api/exams/{
-                                    body_part_id}/appointments/clinics?startDate={start_date.strftime("%Y-%m-%d")}&endDate={end_date.strftime("%Y-%m-%d")}&clinicIds={clinic_id}')
+            response = requests.get(f'https://book.i-med.com.au/api/exams/{body_part_id}/appointments/clinics?startDate={start_date.strftime("%Y-%m-%d")}&endDate={end_date.strftime("%Y-%m-%d")}&clinicIds={clinic_id}')
 
             if response.status_code == 200:
                 data = response.json()
